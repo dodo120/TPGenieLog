@@ -45,18 +45,29 @@ try{
 	listPassager.add(passager2);
 	listPassager.add(passager3);
 
+	if(depart.isBefore(arrivee)) {	
 	Vol vol = new Vol(identifiant,depart,arrivee);
+	
+if(vol == null || listClient.isEmpty() || listPassager.isEmpty()) {
+		System.out.println("Réservation non valide");
+	} else {
+		Reservation reservation = new Reservation(date,identifiantDouble,etat,listClient,listPassager,vol);
+		reservation.confirmer();
 
-	Reservation reservation = new Reservation(date,identifiantDouble,etat,listClient,listPassager,vol);
+		System.out.println("duree: " + vol.duree());
+		System.out.println("reservation etat: " + reservation.etat);
+		reservation.payer();
+		System.out.println("reservation etat: " + reservation.etat);
+		reservation.annuler();
+		System.out.println("reservation etat: " + reservation.etat);
+	}
+	} else {
+System.out.println("La date de départ du vol est après la date d'arrivée");
+}
 
-	reservation.confirmer();
+	
 
-	System.out.println("duree: " + vol.duree());
-	System.out.println("reservation etat: " + reservation.etat);
-	reservation.payer();
-	System.out.println("reservation etat: " + reservation.etat);
-	reservation.annuler();
-	System.out.println("reservation etat: " + reservation.etat);
+	
 }
 catch(Exception e){
 	System.out.println(e + "");
